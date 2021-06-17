@@ -1,0 +1,126 @@
+﻿@model CustomerApplication.Context.Customer_Infoo
+@{
+    ViewBag.Title = "EditCustomer";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<html>
+<head>
+    <style>
+        .error-message {
+            color: red;
+        }
+    </style>
+</head>
+<title>
+
+</title>
+<body>
+    @using (Html.BeginForm("EditCustomers", "Customer", FormMethod.Post))
+    {
+        @Html.HiddenFor(p => p.Customer_Id)
+        <div class="container">
+            <div class="form-group">
+                <label for="First_Name">First Name</label>
+                @Html.ValidationMessageFor(p => p.First_Name, "", new { @class = "error-message" })
+                @Html.TextBoxFor(p => p.First_Name, new { @class = "form-control" })
+            </div>
+
+            <div class="form-group">
+                <label for="Second_Name">Second Name</label>
+                @Html.ValidationMessageFor(p => p.Second_Name, "", new { @class = "error-message" })
+                @Html.TextBoxFor(p => p.Second_Name, new { @class = "form-control" })
+            </div>
+
+            <div class="form-group">
+                <label for="Email">Email</label>
+                @Html.ValidationMessageFor(p => p.Email, "", new { @class = "error-message" })
+                @Html.TextBoxFor(p => p.Email, new { @class = "form-control" })
+            </div>
+
+            <div class="form-group">
+                <label for="Phone">Phone</label>
+                @Html.ValidationMessageFor(p => p.Phone, "", new { @class = "error-message" })
+                @Html.TextBoxFor(p => p.Phone, new { @class = "form-control" })
+            </div>
+
+            <div class="form-group">
+                <label for="Gender">Gender</label>
+                @Html.ValidationMessageFor(p => p.Gender, "", new { @class = "error-message" })
+                @Html.TextBoxFor(p => p.Gender, new { @class = "form-control" })
+            </div>
+
+            <div class="form-group">
+                <label for="Address1">Address1</label>
+                @Html.ValidationMessageFor(p => p.Address1, "", new { @class = "error-message" })
+                @Html.TextBoxFor(p => p.Address1, new { @class = "form-control" })
+            </div>
+
+            <div class="form-group">
+                <label for="Address2">Address2</label>
+                @Html.TextBoxFor(p => p.Address2, new { @class = "form-control" })
+            </div>
+
+            <div class="form-group">
+                <label for="City">City</label>
+                @Html.ValidationMessageFor(p => p.City, "", new { @class = "error-message" })
+                @Html.TextBoxFor(p => p.City, new { @class = "form-control" })
+            </div>
+
+            <div class="form-group">
+                <label for="State">State</label>
+                @Html.ValidationMessageFor(p => p.State, "", new { @class = "error-message" })
+                @Html.TextBoxFor(p => p.State, new { @class = "form-control" })
+            </div>
+
+            <div class="form-group">
+                <label for="Country">Country</label>
+                @Html.ValidationMessageFor(p => p.Country, "", new { @class = "error-message" })
+                @Html.TextBoxFor(p => p.Country, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label>Purpose</label>
+                <label class="checkbox-inline">
+                    @Html.CheckBox("Business", Model.isBusiness.Value, htmlAttributes: new { id = "business" })
+                    Business
+                </label>
+                <label class="checkbox-inline">
+                    @Html.CheckBox("Delivery", Model.isDelivery.Value, htmlAttributes: new { id = "delivery" })
+                    Delivery
+                </label>
+                <label class="checkbox-inline">
+                    @Html.CheckBox("Visiting", Model.isVisiting.Value, htmlAttributes: new { id = "visiting" })
+                    Visiting
+                </label>
+                <label class="checkbox-inline">
+                    @Html.CheckBox("Others", Model.isOther.Value, htmlAttributes: new { id = "others" })
+                    Others
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" onclick="return validate()" class="btn btn-primary" />
+            </div>
+        </div>
+    }
+</body>
+</html>
+
+@section scripts{
+    <script>
+        function validate() {
+            let business = document.getElementById("business");
+            let visiting = document.getElementById("visiting");
+            var others = document.getElementById("others");
+            var delivery = document.getElementById("delivery");
+            if (business.checked || visiting.checked || others.checked || delivery.checked)
+                return true;
+            else {
+                alert("Please select atlease one purpose");
+                return false;
+            }
+
+        }
+
+    </script>
+}
+
